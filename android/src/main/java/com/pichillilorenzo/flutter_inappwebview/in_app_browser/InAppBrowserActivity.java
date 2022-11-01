@@ -21,8 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.ActionBar;
 
 import com.pichillilorenzo.flutter_inappwebview.InAppWebViewMethodHandler;
 import com.pichillilorenzo.flutter_inappwebview.R;
@@ -43,7 +42,7 @@ import java.util.Map;
 
 import io.flutter.plugin.common.MethodChannel;
 
-public class InAppBrowserActivity extends AppCompatActivity implements InAppBrowserDelegate {
+public class InAppBrowserActivity extends Activity implements InAppBrowserDelegate {
 
   static final String LOG_TAG = "InAppBrowserActivity";
   public MethodChannel channel;
@@ -70,14 +69,14 @@ public class InAppBrowserActivity extends AppCompatActivity implements InAppBrow
   public InAppWebViewMethodHandler methodCallDelegate;
   @Nullable
   public InAppBrowserManager manager;
-  
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     Bundle b = getIntent().getExtras();
     if (b == null) return;
-    
+
     id = b.getString("id");
 
     String managerId = b.getString("managerId");
@@ -129,7 +128,7 @@ public class InAppBrowserActivity extends AppCompatActivity implements InAppBrow
     }
     webView.userContentController.addUserOnlyScripts(userScripts);
 
-    actionBar = getSupportActionBar();
+    actionBar = getActionBar();
 
     prepareView();
 
@@ -271,7 +270,7 @@ public class InAppBrowserActivity extends AppCompatActivity implements InAppBrow
             }
           }
         });
-      } 
+      }
     }
 
     return true;
